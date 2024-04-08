@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:rtu_mirea_app/common/aurora_checker.dart';
 import 'package:rtu_mirea_app/presentation/theme.dart';
 import 'package:rtu_mirea_app/presentation/typography.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -40,7 +43,11 @@ class ServiceCard extends StatelessWidget {
               return;
             }
             final Uri url = Uri.parse(this.url!);
-            launchUrl(url, mode: launchMode);
+            if (isAurora) {
+              Process.run('/usr/bin/xdg-open', [url.toString()]);
+            } else {
+              launchUrl(url, mode: launchMode);
+            }
           },
           borderRadius: BorderRadius.circular(12),
           child: Padding(

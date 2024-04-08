@@ -2,6 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rtu_mirea_app/common/aurora_checker.dart';
 import 'package:rtu_mirea_app/domain/entities/news_item.dart';
 import 'package:intl/intl.dart';
 import 'package:rtu_mirea_app/presentation/bloc/news_bloc/news_bloc.dart';
@@ -23,9 +24,11 @@ class NewsCard extends StatelessWidget {
       onTap: () {
         context.go('/news/details', extra: newsItem);
 
-        FirebaseAnalytics.instance.logEvent(name: 'view_news', parameters: {
-          'news_title': newsItem.title,
-        });
+        if (!isAurora) {
+          FirebaseAnalytics.instance.logEvent(name: 'view_news', parameters: {
+            'news_title': newsItem.title,
+          });
+        }
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),

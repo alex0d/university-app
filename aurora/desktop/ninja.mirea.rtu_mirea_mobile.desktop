@@ -1,12 +1,16 @@
 [Desktop Entry]
 Type=Application
-Name=rtu_mirea_mobile
-Comment=A new Flutter project.
+Name=RTU MIREA
+Name[ru]=РТУ МИРЭА
+Comment=Mobile application for students of RTU MIREA
 Icon=ninja.mirea.rtu_mirea_mobile
 Exec=/usr/bin/ninja.mirea.rtu_mirea_mobile
+# Comment out the line below if you use Sandboxing=Disabled
 X-Nemo-Application-Type=silica-qt5
 
 [X-Application]
-Permissions=
+Permissions=Internet;UserDirs;SecureStorage
 OrganizationName=ninja.mirea
 ApplicationName=rtu_mirea_mobile
+# The line below allows you to run the application outside the sandbox. Please note that in this case, the package does not pass validation
+# Sandboxing=Disabled

@@ -7,6 +7,8 @@ function(add_library TARGET)
     _add_library(${TARGET} ${ARGN})
 
     if (
+      "${TARGET}" MATCHES "^package_info_plus_aurora_platform_plugin$" OR
+      "${TARGET}" MATCHES "^xdga_directories$" OR
       FALSE
     )
       add_custom_command(TARGET ${TARGET} POST_BUILD
@@ -17,9 +19,11 @@ function(add_library TARGET)
 endfunction()
 
 list(APPEND FLUTTER_PLATFORM_PLUGIN_LIST
+    package_info_plus_aurora
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+    xdga_directories
 )
 
 foreach(PLUGIN ${FLUTTER_PLATFORM_PLUGIN_LIST})

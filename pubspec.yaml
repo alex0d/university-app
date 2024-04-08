@@ -22,6 +22,11 @@ dependencies:
     sdk: flutter
 
   path_provider: ^2.1.1
+  path_provider_aurora:
+    git:
+      url: https://gitlab.com/omprussia/flutter/flutter-plugins.git
+      ref: path_provider_aurora-0.0.1
+      path: packages/path_provider/path_provider_aurora
 
   flutter_localizations:
     sdk: flutter
@@ -62,7 +67,12 @@ dependencies:
 
   # Simple no-sql local database. 
   # See https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.0.11
+  shared_preferences: ^2.1.2
+  shared_preferences_aurora:
+    git:
+      url: https://gitlab.com/omprussia/flutter/flutter-plugins.git
+      ref: shared_preferences_aurora-0.0.1
+      path: packages/shared_preferences/shared_preferences_aurora
 
   # State management library. 
   # See https://pub.dev/packages/bloc
@@ -168,6 +178,11 @@ dependencies:
   # Get version name in runtime
   # https://pub.dev/packages/package_info_plus
   package_info_plus: ^4.1.0
+  package_info_plus_aurora:
+    git:
+      url: https://gitlab.com/omprussia/flutter/flutter-plugins.git
+      ref: package_info_plus_aurora-0.0.1
+      path: packages/package_info_plus/package_info_plus_aurora
 
   # Encapsulates the notion of the "current time". Very useful for testing
   # See https://pub.dev/packages/clock

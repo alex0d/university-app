@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:rtu_mirea_app/common/aurora_checker.dart';
 import 'package:rtu_mirea_app/common/oauth.dart';
 
 import 'package:rtu_mirea_app/common/widget_data_init.dart';
@@ -66,9 +67,11 @@ class GlobalBlocObserver extends BlocObserver {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  if (!isAurora) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
 
   await dependency_injection.setup();
 
@@ -105,7 +108,9 @@ Future<void> main() async {
   Bloc.observer = GlobalBlocObserver();
 
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationCacheDirectory(),
+    storageDirectory: isAurora
+        ? await getApplicationSupportDirectory()
+        : await getApplicationCacheDirectory(),
   );
 
   await SentryFlutter.init(

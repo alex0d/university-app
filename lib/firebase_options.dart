@@ -16,26 +16,21 @@ import 'package:flutter/foundation.dart'
 /// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    try {
-      switch (defaultTargetPlatform) {
-        case TargetPlatform.android:
-          return android;
-        case TargetPlatform.iOS:
-          return ios;
-        case TargetPlatform.macOS:
-          return macos;
-        case TargetPlatform.fuchsia:
-          break;
-        case TargetPlatform.linux:
-          break;
-        case TargetPlatform.windows:
-          return windows;
-      }
-    } catch (e) {
-      // If we can't determine the platform, we'll just return the web options.
-      if (kIsWeb) {
-        return web;
-      }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return android;
+      case TargetPlatform.iOS:
+        return ios;
+      case TargetPlatform.macOS:
+        return macos;
+      case TargetPlatform.fuchsia:
+        break;
+      case TargetPlatform.linux:
+        break;
+      case TargetPlatform.windows:
+        return windows;
+      default:
+        break;
     }
 
     if (kIsWeb) {

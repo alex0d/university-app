@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:rtu_mirea_app/common/aurora_checker.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import 'package:dismissible_page/dismissible_page.dart';
@@ -59,10 +60,12 @@ class _StoriesPageViewState extends State<StoriesPageView> {
                   itemBuilder: (context, pageIndex, storyIndex) {
                     if (pageIndex != _prevStoryIndex) {
                       _prevStoryIndex = pageIndex;
-                      FirebaseAnalytics.instance
-                          .logEvent(name: 'view_story', parameters: {
-                        'story_title': widget.stories[pageIndex].title,
-                      });
+                      if (!isAurora) {
+                        FirebaseAnalytics.instance
+                            .logEvent(name: 'view_story', parameters: {
+                          'story_title': widget.stories[pageIndex].title,
+                        });
+                      }
                     }
                     final author = widget.stories[pageIndex].author;
                     final page = widget.stories[pageIndex].pages[storyIndex];

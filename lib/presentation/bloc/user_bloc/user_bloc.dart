@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get/get.dart';
+import 'package:rtu_mirea_app/common/aurora_checker.dart';
 import 'package:rtu_mirea_app/domain/entities/student.dart';
 import 'package:rtu_mirea_app/domain/entities/user.dart';
 import 'package:rtu_mirea_app/domain/usecases/get_auth_token.dart';
@@ -73,7 +74,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       user.fold(
         (failure) => emit(const _Unauthorized()),
         (user) {
-          FirebaseAnalytics.instance.logLogin();
+          if (!isAurora) {
+            FirebaseAnalytics.instance.logLogin();
+          }
           var student = getActiveStudent(user);
 
           _setSentryUserIdentity(
